@@ -1,11 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "./pages/main";
+import Day from "./pages/day";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route />
-        <Route />
+        <Route path="/" element={<Main />} />
+        <Route path="/:day" element={<Day />} />
       </Routes>
     </BrowserRouter>
   );
