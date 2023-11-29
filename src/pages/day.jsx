@@ -19,11 +19,20 @@ const Day = () => {
   const { day } = useParams();
 
   const onClickNext = () => {
-    if (currentPage < dailyData.sentences.length - 1)
+    if (currentPage < dailyData.sentences.length - 1) {
       setCurrentPage(currentPage + 1);
+    }
+    if (isVisible) {
+      setIsVisible(!isVisible);
+    }
   };
   const onClickPrev = () => {
-    if (currentPage > 0) setCurrentPage(currentPage - 1);
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+    if (isVisible) {
+      setIsVisible(!isVisible);
+    }
   };
   const onClickSpeed = () => {
     if (speakingRate === 1) setspeakingRate(2);
@@ -87,55 +96,58 @@ const Day = () => {
     <div className="container relative">
       <div className="absolute top-0 left-0 p-8">
         <Link to="/" className="text-3xl hover:text-gray-400">
-          <FiHome />
+          <FiHome className=" hover:animate-bounce" />
         </Link>
       </div>
       <h1 className="text-center text-2xl font-semibold">
         Day {dailyData.day} - {dailyData.title}
       </h1>
-      <div className="mt-12">
-        <div>{dailyData.sentences[currentPage].english}</div>
+      <div className="mt-12 h-36">
+        <div className="mb-4">{dailyData.sentences[currentPage].english}</div>
         <button
           className={`${!isVisible && "bg-black"}`}
           onClick={() => setIsVisible(!isVisible)}
         >
           {dailyData.sentences[currentPage].korean}
         </button>
-        <div className="mt-4 flex justify-between">
-          <div>
-            <button
-              className={`btn-style ${
-                currentPage === 0 && "hover:border-red-500 hover:text-red-500"
-              }`}
-              onClick={onClickPrev}
-            >
-              {currentPage === 0 ? <FiSlash /> : <FiChevronsLeft />}
-            </button>
-            <button
-              className={`btn-style ml-2 ${
-                currentPage === dailyData.sentences.length - 1 &&
-                "hover:border-red-500 hover:text-red-500"
-              }`}
-              onClick={onClickNext}
-            >
-              {currentPage === dailyData.sentences.length - 1 ? (
-                <FiSlash />
-              ) : (
-                <FiChevronsRight />
-              )}
-            </button>
-          </div>
-          <div>
-            <button className="btn-style" onClick={onClickSpeed}>
-              {`${speakingRate === 1 ? "x1" : "x2"}`}
-            </button>
-            <button
-              className="btn-style ml-2 hover:border-blue-500 hover:text-blue-500"
-              onClick={onClickSound}
-            >
-              <FiVolume2 />
-            </button>
-          </div>
+      </div>
+      <div className="mt-4 flex justify-between">
+        <div className="flex">
+          <button
+            className={`btn-style ${
+              currentPage === 0 && "hover:border-red-500 hover:text-red-500"
+            }`}
+            onClick={onClickPrev}
+          >
+            {currentPage === 0 ? <FiSlash /> : <FiChevronsLeft />}
+          </button>
+          <button
+            className={`btn-style ml-2 ${
+              currentPage === dailyData.sentences.length - 1 &&
+              "hover:border-red-500 hover:text-red-500"
+            }`}
+            onClick={onClickNext}
+          >
+            {currentPage === dailyData.sentences.length - 1 ? (
+              <FiSlash />
+            ) : (
+              <FiChevronsRight />
+            )}
+          </button>
+        </div>
+        <div className="flex">
+          <button
+            className="btn-style text-lg hover:border-blue-500 hover:text-blue-500"
+            onClick={onClickSpeed}
+          >
+            {`${speakingRate === 1 ? "x1" : "x2"}`}
+          </button>
+          <button
+            className="btn-style ml-2 hover:border-blue-500 hover:text-blue-500"
+            onClick={onClickSound}
+          >
+            <FiVolume2 />
+          </button>
         </div>
       </div>
     </div>
