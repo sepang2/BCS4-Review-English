@@ -8,7 +8,7 @@
   }
 
   .btn-style {
-    @apply border-2 border-black px-2 rounded-md;
+    @apply border-2 border-black px-4 text-2xl rounded-md hover:border-gray-400 hover:text-gray-400;
   }
 }
 
